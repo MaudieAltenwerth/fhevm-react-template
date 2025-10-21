@@ -2,6 +2,16 @@
 
 A framework-agnostic SDK for building confidential decentralized applications with Fully Homomorphic Encryption (FHE) using Zama's FHEVM. Inspired by wagmi's developer experience, this SDK provides a simple and intuitive API for encrypted computations on blockchain.
 
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+[![TypeScript](https://img.shields.io/badge/TypeScript-5.3-blue.svg)](https://www.typescriptlang.org/)
+[![FHE](https://img.shields.io/badge/FHE-Zama-purple.svg)](https://www.zama.ai/)
+
+**GitHub Repository**: [https://github.com/MaudieAltenwerth/fhevm-react-template](https://github.com/MaudieAltenwerth/fhevm-react-template)
+
+**Live Demo**: [https://confidential-sports.vercel.app/](https://confidential-sports.vercel.app/)
+
+**Demo Video**: The `demo.mp4` file in the repository contains a comprehensive demonstration. Please download the file to view it (the video cannot be streamed online, download is required for viewing).
+
 ## Features
 
 - **🎯 Framework Agnostic**: Works with React, Next.js, Vue, Node.js, or vanilla JavaScript
@@ -254,7 +264,7 @@ npm install
 npm run dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000)
+Then open your browser and navigate to the local development server that starts.
 
 **Key Files**:
 - `src/app/page.tsx` - Main application with FhevmProvider
@@ -542,23 +552,88 @@ MIT License - see LICENSE file for details
 
 ## Demo Video
 
-See `DEMO_INSTRUCTIONS.md` for guidance on creating the demonstration video.
+The `demo.mp4` file in the repository provides a complete demonstration of the FHEVM SDK.
+
+**Important**: The video file must be downloaded to view. It cannot be streamed or played through web links. Please clone the repository or download the file directly to watch the demonstration.
 
 The demo video showcases:
-- SDK architecture and features
-- Next.js example application
-- Real-time encrypted operations
-- Code walkthrough
-- Smart contract integration
+- **SDK Architecture**: Overview of the framework-agnostic design
+- **Core Features**: Encryption, decryption, and React hooks
+- **Next.js Example**: Live demonstration of the sports contract application
+- **Wallet Integration**: MetaMask connection and FHEVM initialization
+- **Encrypted Operations**: Real-time encryption of athlete salaries and bonuses
+- **Code Walkthrough**: Detailed explanation of SDK integration
+- **Smart Contract**: FHE types and privacy-preserving computations
+
+For instructions on creating additional demo videos, see `DEMO_INSTRUCTIONS.md`.
+
+## Live Demo Application
+
+**URL**: [https://confidential-sports.vercel.app/](https://confidential-sports.vercel.app/)
+
+The live demo showcases the FHEVM SDK integrated into a Next.js application for confidential sports contract management.
+
+### Features Available in Live Demo:
+- **Wallet Connection**: Connect MetaMask to Sepolia testnet
+- **FHEVM Initialization**: Automatic initialization of FHE encryption
+- **Team Registration**: Create teams with encrypted salary caps
+- **Athlete Management**: Register athletes with confidential salaries and bonuses
+- **Contract Proposals**: Submit and approve encrypted contract offers
+- **Salary Cap Verification**: Check compliance without revealing individual salaries
+- **Real-time Encryption**: See FHE operations in action
+
+### Requirements:
+- MetaMask browser extension installed
+- Sepolia testnet selected in MetaMask
+- Sufficient Sepolia test ETH for transactions (get from faucet)
+- Modern web browser (Chrome, Firefox, Brave recommended)
+
+### Try It Out:
+1. Visit the live demo URL
+2. Click "Connect Wallet" and approve MetaMask connection
+3. Wait for FHEVM to initialize (may take a few seconds)
+4. Explore the team and athlete registration features
+5. Test encrypted salary operations
+
+## GitHub Repository
+
+**Repository URL**: [https://github.com/MaudieAltenwerth/fhevm-react-template](https://github.com/MaudieAltenwerth/fhevm-react-template)
+
+### Repository Structure:
+- `packages/fhevm-sdk/` - Core SDK package
+- `examples/nextjs-sports-contract/` - Next.js demo application
+- `examples/sports-contract/` - Solidity smart contract
+- `DEMO_INSTRUCTIONS.md` - Video recording guide
+- `demo.mp4` - Demonstration video (download to view)
+
+### Clone and Run Locally:
+
+```bash
+# Clone the repository
+git clone https://github.com/MaudieAltenwerth/fhevm-react-template.git
+cd fhevm-react-template
+
+# Install dependencies
+npm install
+
+# Build SDK
+npm run build:sdk
+
+# Run Next.js example
+cd examples/nextjs-sports-contract
+npm install
+npm run dev
+```
 
 ## Acknowledgments
 
 - Built with [fhevmjs](https://github.com/zama-ai/fhevmjs) by Zama
 - Inspired by [wagmi](https://wagmi.sh/) developer experience
 - Powered by Fully Homomorphic Encryption (FHE)
+- Sports contract example demonstrates real-world FHE applications
 
 ---
 
 **Built with ❤️ for the FHEVM community**
 
-For questions and support, please open an issue on GitHub.
+For questions and support, please open an issue on the [GitHub repository](https://github.com/MaudieAltenwerth/fhevm-react-template).

@@ -84,33 +84,103 @@ function YourComponent() {
 ```
 fhevm-react-template/
 ├── packages/
-│   └── fhevm-sdk/           # Core SDK package
+│   └── fhevm-sdk/                # Core SDK package
 │       ├── src/
-│       │   ├── client.ts    # FHEVM client
-│       │   ├── encrypt.ts   # Encryption utilities
-│       │   ├── decrypt.ts   # Decryption utilities
-│       │   ├── react.tsx    # React hooks
-│       │   ├── types.ts     # TypeScript types
-│       │   ├── utils.ts     # Utility functions
-│       │   └── index.ts     # Main exports
+│       │   ├── core/             # Core FHEVM logic
+│       │   │   └── fhevm.ts      # Main FHEVM client
+│       │   ├── hooks/            # React hooks
+│       │   │   └── useFhevm.tsx  # Custom React hooks
+│       │   ├── adapters/         # Framework adapters
+│       │   ├── utils/            # Utility functions
+│       │   │   ├── encryption.ts # Encryption utilities
+│       │   │   ├── decryption.ts # Decryption utilities
+│       │   │   └── index.ts      # Common utilities
+│       │   ├── types/            # TypeScript type definitions
+│       │   │   └── index.ts      # Type exports
+│       │   ├── client.ts         # FHEVM client (legacy)
+│       │   ├── encrypt.ts        # Encryption (legacy)
+│       │   ├── decrypt.ts        # Decryption (legacy)
+│       │   ├── react.tsx         # React integration
+│       │   └── index.ts          # Main exports
 │       └── package.json
 │
-├── examples/
-│   ├── nextjs-sports-contract/  # Next.js example with sports contract
+├── examples/                     # Example templates
+│   ├── nextjs-sports-contract/   # Next.js example with SDK
 │   │   ├── src/
-│   │   │   ├── app/         # Next.js app directory
-│   │   │   ├── components/  # React components
-│   │   │   └── lib/         # Contract config
+│   │   │   ├── app/              # Next.js App Router
+│   │   │   │   ├── layout.tsx    # Root layout
+│   │   │   │   ├── page.tsx      # Home page
+│   │   │   │   ├── globals.css   # Global styles
+│   │   │   │   └── api/          # API routes
+│   │   │   │       ├── fhe/      # FHE operations API
+│   │   │   │       │   ├── route.ts       # Main FHE endpoint
+│   │   │   │       │   ├── encrypt/route.ts
+│   │   │   │       │   ├── decrypt/route.ts
+│   │   │   │       │   └── compute/route.ts
+│   │   │   │       └── keys/route.ts      # Key management API
+│   │   │   ├── components/       # React components
+│   │   │   │   ├── ui/           # Base UI components
+│   │   │   │   │   ├── Button.tsx
+│   │   │   │   │   ├── Input.tsx
+│   │   │   │   │   └── Card.tsx
+│   │   │   │   ├── fhe/          # FHE-specific components
+│   │   │   │   │   ├── FHEProvider.tsx
+│   │   │   │   │   ├── EncryptionDemo.tsx
+│   │   │   │   │   ├── ComputationDemo.tsx
+│   │   │   │   │   └── KeyManager.tsx
+│   │   │   │   ├── examples/     # Use case examples
+│   │   │   │   │   ├── BankingExample.tsx
+│   │   │   │   │   └── MedicalExample.tsx
+│   │   │   │   ├── RegisterTeam.tsx
+│   │   │   │   ├── RegisterAthlete.tsx
+│   │   │   │   └── WalletConnect.tsx
+│   │   │   ├── lib/              # Libraries
+│   │   │   │   ├── fhe/          # FHE integration
+│   │   │   │   │   ├── client.ts
+│   │   │   │   │   ├── server.ts
+│   │   │   │   │   ├── keys.ts
+│   │   │   │   │   └── types.ts
+│   │   │   │   ├── utils/        # Utilities
+│   │   │   │   │   ├── security.ts
+│   │   │   │   │   └── validation.ts
+│   │   │   │   └── contract.ts
+│   │   │   ├── hooks/            # Custom hooks
+│   │   │   │   ├── useFHE.ts
+│   │   │   │   ├── useEncryption.ts
+│   │   │   │   └── useComputation.ts
+│   │   │   └── types/            # Type definitions
+│   │   │       ├── fhe.ts
+│   │   │       └── api.ts
 │   │   └── package.json
 │   │
-│   └── sports-contract/     # Smart contract example
-│       └── contracts/
-│           └── ConfidentialSportsContract.sol
+│   ├── react-basic/              # Basic React example with SDK
+│   │   ├── src/
+│   │   │   ├── App.jsx           # Main React app with FHEVM integration
+│   │   │   ├── main.jsx          # React entry point
+│   │   │   └── index.css         # Styles
+│   │   ├── index.html            # HTML template
+│   │   ├── vite.config.js        # Vite configuration
+│   │   └── package.json
+│   │
+│   └── sports-contract/          # Sports contract with React frontend
+│       ├── src/                  # React source files
+│       │   ├── App.jsx           # Main app with SDK integration
+│       │   ├── main.jsx          # Entry point
+│       │   └── index.css         # Styles
+│       ├── contracts/            # Smart contracts
+│       │   └── ConfidentialSportsContract.sol
+│       ├── public/               # Static files (legacy HTML/JS for reference)
+│       ├── index.html            # Vite HTML template
+│       ├── vite.config.js        # Vite configuration
+│       ├── hardhat.config.js     # Hardhat configuration
+│       └── package.json
 │
-├── package.json             # Workspace root
-├── README.md               # This file
-├── DEMO_INSTRUCTIONS.md    # Video recording guide
-└── demo.txt               # Demo video placeholder
+├── templates/                    # Templates directory (alias)
+├── package.json                  # Workspace root
+├── README.md                     # This file
+├── GETTING_STARTED.md           # Quick start guide
+├── DEMO_INSTRUCTIONS.md         # Video recording guide
+└── demo.txt                     # Demo video placeholder
 ```
 
 ## SDK API Reference
@@ -246,7 +316,7 @@ const encrypted = await input.encrypt();
 
 ### Example 1: Next.js Sports Contract
 
-A complete Next.js application demonstrating encrypted athlete salaries and team payrolls.
+A complete Next.js application demonstrating encrypted athlete salaries and team payrolls with full SDK integration.
 
 **Location**: `examples/nextjs-sports-contract/`
 
@@ -255,6 +325,10 @@ A complete Next.js application demonstrating encrypted athlete salaries and team
 - Register athletes with encrypted salaries and bonuses
 - Propose and approve contracts with encrypted terms
 - Check salary cap compliance without revealing individual salaries
+- API routes for FHE operations
+- Complete UI component library
+- FHE-specific components for encryption/decryption demos
+- Banking and medical use case examples
 
 **Run the example**:
 
@@ -266,23 +340,105 @@ npm run dev
 
 Then open your browser and navigate to the local development server that starts.
 
-**Key Files**:
+**Key Files and Structure**:
+
+**App Router & API**:
 - `src/app/page.tsx` - Main application with FhevmProvider
+- `src/app/api/fhe/route.ts` - FHE operations API endpoint
+- `src/app/api/fhe/encrypt/route.ts` - Encryption API
+- `src/app/api/fhe/decrypt/route.ts` - Decryption API
+- `src/app/api/fhe/compute/route.ts` - Computation API
+- `src/app/api/keys/route.ts` - Key management API
+
+**Components**:
+- `src/components/ui/` - Base UI components (Button, Input, Card)
+- `src/components/fhe/` - FHE-specific components
+  - `FHEProvider.tsx` - FHE context provider
+  - `EncryptionDemo.tsx` - Interactive encryption demo
+  - `ComputationDemo.tsx` - Homomorphic computation demo
+  - `KeyManager.tsx` - Key status display
+- `src/components/examples/` - Use case examples
+  - `BankingExample.tsx` - Financial privacy use case
+  - `MedicalExample.tsx` - Healthcare privacy use case
 - `src/components/RegisterTeam.tsx` - Team registration with SDK
 - `src/components/RegisterAthlete.tsx` - Athlete registration using useEncryptedInput hook
 
-### Example 2: Sports Contract (Solidity)
+**Libraries & Utilities**:
+- `src/lib/fhe/` - FHE integration layer
+  - `client.ts` - Client-side FHE operations
+  - `server.ts` - Server-side utilities
+  - `keys.ts` - Key management
+  - `types.ts` - Type definitions
+- `src/lib/utils/` - Common utilities
+  - `security.ts` - Security helpers
+  - `validation.ts` - Input validation
+- `src/lib/contract.ts` - Contract configuration
 
-Confidential sports contract with encrypted athlete data.
+**Hooks**:
+- `src/hooks/useFHE.ts` - Re-exports SDK hooks
+- `src/hooks/useEncryption.ts` - Custom encryption hooks
+- `src/hooks/useComputation.ts` - Computation hooks
 
-**Location**: `examples/sports-contract/contracts/ConfidentialSportsContract.sol`
+**Types**:
+- `src/types/fhe.ts` - FHE type definitions
+- `src/types/api.ts` - API type definitions
+
+### Example 2: React Basic
+
+A minimal React application demonstrating the FHEVM SDK fundamentals.
+
+**Location**: `examples/react-basic/`
 
 **Features**:
-- Encrypted salaries (euint32)
-- Encrypted bonuses (euint32)
-- Encrypted salary caps (euint32)
-- Privacy-preserving payroll calculations
-- Encrypted salary cap compliance checks
+- Simple wallet connection flow
+- FHEVM initialization demonstration
+- Basic number encryption
+- Minimal UI for learning
+- Vite-based React setup
+
+**Run the example**:
+
+```bash
+cd examples/react-basic
+npm install
+npm run dev
+```
+
+### Example 3: Sports Contract (React + Solidity)
+
+Full-featured React application with confidential sports contract backend.
+
+**Location**: `examples/sports-contract/`
+
+**Features**:
+- Complete React frontend with SDK integration
+- Team registration with encrypted salary caps
+- Athlete management with encrypted salaries and bonuses
+- Contract proposal system with encrypted terms
+- Query interface for team and athlete information
+- Solidity smart contract with FHE types
+- Vite + React development setup
+- Hardhat for smart contract compilation and deployment
+
+**Run the frontend**:
+
+```bash
+cd examples/sports-contract
+npm install
+npm run dev
+```
+
+**Compile contracts**:
+
+```bash
+cd examples/sports-contract
+npm run compile
+```
+
+**Key Files**:
+- `src/App.jsx` - Main React app with FHEVM SDK integration
+- `contracts/ConfidentialSportsContract.sol` - FHE-enabled smart contract
+- `public/` - Legacy static HTML/JS (kept for reference)
 
 ## Use Cases
 
